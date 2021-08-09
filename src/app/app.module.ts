@@ -1,11 +1,13 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClusComponent } from './clus/clus.component';
-import { PrimeNgModule } from './prime-ng.module';
+import {CardModule} from 'primeng/card';
+import {TableModule} from 'primeng/table';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,12 @@ import { PrimeNgModule } from './prime-ng.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    PrimeNgModule,
+    CardModule,
+    TableModule,
+    FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }
