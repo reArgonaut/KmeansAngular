@@ -1,0 +1,213 @@
+<!-- <table>
+  <thead>
+    <tr>
+      <th >-</th>
+      <th >V1</th>
+      <th >V2</th>
+      <th >V3</th>
+      <th >V4</th>
+      <th >V5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let elem of data; index as i">
+      <th>D{{i+1}}</th>
+      <th *ngFor="let linea of elem | keyvalue">{{ linea.value }}</th>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th >-</th>
+      <th >V1</th>
+      <th >V2</th>
+      <th >V3</th>
+      <th >V4</th>
+      <th >V5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let elem of Centros1; index as i">
+      <th>D{{i+1}}</th>
+      <th *ngFor="let linea of elem | keyvalue">{{ linea.value }}</th>
+    </tr>
+  </tbody>
+</table>  
+<button (click)="FU2()">:P</button>
+
+<div *ngFor="let x of DatosFinal; index as z">
+  <table>
+    <thead>
+      <tr>
+        <th >{{z}}</th>
+        <th >V1</th>
+        <th >V2</th>
+        <th >V3</th>
+        <th >min</th>
+        <th >Clus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let elem of DatosFinal[z]; index as i">
+        <th>D{{i+1}}</th>
+        
+        <th *ngFor="let kv of elem | keyvalue">
+          <div *ngIf="elem[4]==1" >
+            <a style="background-color: lightblue;">{{ kv.value.toFixed(2) }}</a>
+          </div>  
+          <div *ngIf="elem[4]==2" >
+            <a style="background-color: lightcoral;">{{ kv.value.toFixed(2) }}</a>
+          </div>  
+          <div *ngIf="elem[4]==3" >
+            <a style="background-color: lightgreen;">{{ kv.value.toFixed(2) }}</a>
+          </div>          
+        </th>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <table>
+    <thead>
+      <tr>
+        <th >{{z+1}}</th>
+        <th >V1</th>
+        <th >V2</th>
+        <th >V3</th>
+        <th >V4</th>
+        <th >V5</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let elem of CentrosFinal[z]; index as i">
+        <th>D{{i+1}}</th>
+        <th *ngFor="let kv of elem | keyvalue">{{ kv.value.toFixed(2) }}</th>
+      </tr>
+    </tbody>
+  </table>
+  
+</div> -->
+
+<p-card>
+  <p-table styleClass="p-datatable-gridlines">
+    <ng-template pTemplate="caption">
+      Datos iniciales
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Inicial</th>
+        <th>V1</th>
+        <th>V2</th>
+        <th>V3</th>
+        <th>V4</th>
+        <th>V5</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body">
+      <tr *ngFor="let elem of data; index as i">
+        <th>D{{i+1}}</th>
+        <th *ngFor="let kv of elem | keyvalue">{{ kv.value }}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      Fin de datos iniciales
+    </ng-template>
+  </p-table>
+</p-card>
+
+<p-card>
+  <p-table styleClass="p-datatable-gridlines">
+    <ng-template pTemplate="caption">
+      Centros iniciales
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Inicial</th>
+        <th>V1</th>
+        <th>V2</th>
+        <th>V3</th>
+        <th>V4</th>
+        <th>V5</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body">
+      <tr *ngFor="let elem of Centros1; index as i">
+        <th>D{{i+1}}</th>
+        <th *ngFor="let linea of elem | keyvalue">{{ linea.value }}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      Fin de centros iniciales
+    </ng-template>
+  </p-table>
+</p-card>
+
+<p-card>
+  <input type="text" pInputText [(ngModel)]="iteration"/>
+</p-card>
+
+<p-card *ngFor="let x of DatosFinal; index as z">
+  
+  <p-table styleClass="p-datatable-gridlines">
+    <ng-template pTemplate="caption">
+      Datos finales
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>{{z}}</th>
+        <th>V1</th>
+        <th>V2</th>
+        <th>V3</th>
+        <th>V4</th>
+        <th>V5</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body">
+      <tr *ngFor="let elem of DatosFinal[z]; index as i">
+        <th>D{{i+1}}</th>
+        
+        <th *ngFor="let kv of elem | keyvalue">
+          <div *ngIf="elem[4]==1" >
+            <a style="background-color: lightblue;">{{ kv.value.toFixed(2) }}</a>
+          </div>  
+          <div *ngIf="elem[4]==2" >
+            <a style="background-color: lightcoral;">{{ kv.value.toFixed(2) }}</a>
+          </div>  
+          <div *ngIf="elem[4]==3" >
+            <a style="background-color: lightgreen;">{{ kv.value.toFixed(2) }}</a>
+          </div>          
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      Fin de datos finales
+    </ng-template>
+  </p-table>
+  
+  <p-table styleClass="p-datatable-gridlines">
+    <ng-template pTemplate="caption">
+      Datos finales
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>{{z+1}}</th>
+        <th>V1</th>
+        <th>V2</th>
+        <th>V3</th>
+        <th>V4</th>
+        <th>V5</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body">
+      <tr *ngFor="let elem of CentrosFinal[z]; index as i">
+        <th>D{{i+1}}</th>
+        <th *ngFor="let kv of elem | keyvalue">{{ kv.value.toFixed(2) }}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      Fin de datos finales
+    </ng-template>
+  </p-table>
+  
+</p-card>
