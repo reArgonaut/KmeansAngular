@@ -8,11 +8,17 @@ import { ClusComponent } from './clus/clus.component';
 import {CardModule} from 'primeng/card';
 import {TableModule} from 'primeng/table';
 import { FormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ChartsModule } from 'ng2-charts';
+import { AgGridModule } from 'ag-grid-angular';
+import { AgChartsAngularModule } from 'ag-charts-angular';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClusComponent
+    ClusComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,7 +26,11 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     CardModule,
     TableModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule,
+    ChartsModule,
+    AgGridModule.withComponents([]),
+    AgChartsAngularModule
   ],
   providers: [],
   bootstrap: [AppComponent],
