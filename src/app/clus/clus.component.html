@@ -15,7 +15,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let elem of data; index as i">
-        <th>D{{i+1}}</th>
+        <th>{{i+1}}</th>
         <th *ngFor="let linea of elem | keyvalue">{{ linea.value }}</th>
       </tr>
     </tbody>
@@ -35,7 +35,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let elem of Centros1; index as i">
-        <th>D{{i+1}}</th>
+        <th>Centro {{i+1}}</th>
         <th *ngFor="let linea of elem | keyvalue">{{ linea.value }}</th>
       </tr>
     </tbody>
@@ -46,7 +46,7 @@
     <h4>No Pre-Definido</h4> 
   </div>
   <div class="input-group mb-3">
-    <span class="input-group-text" id="basic-addon1">Clusters</span>
+    <span class="input-group-text" id="basic-addon1">Clusters 2 O 3</span>
     <input type="number" class="form-control" placeholder="0" [(ngModel)]="nClusters">
     <span class="input-group-text" id="basic-addon1">Iteraciones</span>
     <input type="number" class="form-control" placeholder="1" [(ngModel)]="nIteraciones" >
@@ -64,7 +64,7 @@
 
 <div class="card-body" style="width: 50rem;" *ngFor="let x of DatosFinal; index as z">
   <div *ngIf="(z!=DatosFinal.length-1) &&  (DatosFinal.length!=z) && nClusterF==3">
-  <h5>Datos de iteracion {{z+1}}</h5>
+  <h5>Matriz de distancia iteración {{z+1}}</h5>
   <table class="table table-bordered  table-success table-striped">
     <thead class="table-gray">
       <tr>
@@ -72,14 +72,14 @@
         <th >V1</th>
         <th >V2</th>
         <th>V3</th>
-        <th >min</th>
-        <th >Clus</th>
+        <th >Minimo</th>
+        <th >Clúster</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let elem of DatosFinal[z]; index as i">
         
-        <th>D{{i+1}}</th>
+        <th>{{i+1}}</th>
         
         <th *ngFor="let kv of elem | keyvalue">
           <div *ngIf="elem[elem.length-1]==1" >
@@ -97,7 +97,7 @@
     </tbody>
   </table>
   <div >
-  <h5>Centros de iteracion {{z+1}}</h5>
+  <h5>Centros de iteración {{z+1}}</h5>
   <table class="table table-bordered  table-dark table-striped">
     <thead class="table-gray">
       <tr>
@@ -111,14 +111,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let elem of CentrosFinal[z]; index as i">
-        <th>D{{i+1}}</th>
+        <th>Centro {{i+1}}</th>
         <th *ngFor="let kv of elem | keyvalue "><span> {{ roundNumber(kv.value) }} </span></th>
       </tr>
     </tbody>
   </table>
 
 </div>
-<h5>Grupos de iteracion {{z+1}}</h5>
+<h5>Grupos de iteración {{z+1}}</h5>
 <table class="table table-bordered  table-dark table-striped">
   <thead class="table-gray">
     <tr>
@@ -133,21 +133,21 @@
 </table>
 </div>
 <div *ngIf="(z!=DatosFinal.length-1) &&  (DatosFinal.length!=z) && nClusterF==2">
-  <h5>Datos de iteracion {{z+1}}</h5>
+  <h5>Matriz de distancia iteración {{z+1}}</h5>
   <table class="table table-bordered  table-success table-striped">
     <thead class="table-gray">
       <tr>
         <th >{{z+1}}</th>
         <th >V1</th>
         <th >V2</th>
-        <th >min</th>
-        <th >Clus</th>
+        <th >Minimo</th>
+        <th >Clúster</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let elem of DatosFinal[z]; index as i">
         
-        <th>D{{i+1}}</th>
+        <th>{{i+1}}</th>
         
         <th *ngFor="let kv of elem | keyvalue">
           <div *ngIf="elem[elem.length-1]==1" >
@@ -165,7 +165,7 @@
     </tbody>
   </table>
   <div >
-  <h5>Centros de iteracion {{z+1}}</h5>
+  <h5>Centros de iteración {{z+1}}</h5>
   <table class="table table-bordered  table-dark table-striped">
     <thead class="table-gray">
       <tr>
@@ -179,14 +179,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let elem of CentrosFinal[z]; index as i">
-        <th>D{{i+1}}</th>
+        <th>Centro {{i+1}}</th>
         <th *ngFor="let kv of elem | keyvalue "><span> {{ roundNumber(kv.value) }} </span></th>
       </tr>
     </tbody>
   </table>
 
 </div>
-<h5>Grupos de iteracion {{z+1}}</h5>
+<h5>Grupos de iteración {{z+1}}</h5>
 <table class="table table-bordered  table-dark table-striped">
   <thead class="table-gray">
     <tr>
@@ -199,104 +199,125 @@
     </tr>
   </tbody>
 </table>
-<div class="input-group mb-3">
-  <canvas baseChart
-    [datasets]="scatterChartData"
-    [options]="scatterChartOptions"
-    [chartType]="scatterChartType">
-  </canvas>
-	
-</div>
 </div>
 </div>
 
-<h1> DATOS FINALES</h1>
+<h1>Datos Finales</h1>
 <div class="card-body" style="width: 50rem;" *ngFor="let x of DatosFinal; index as z">
   <div *ngIf="z==DatosFinal.length-1  && nClusterF==3">
-  <h5>Datos de Distancia euclidiana Final</h5>
-  <table class="table table-bordered  table-success table-striped">
-    <thead class="table-gray">
-      <tr>
-        <th >{{z+1}}</th>
-        <th >V1</th>
-        <th >V2</th>
-        <th >V3</th>
-        <th >min</th>
-        <th >Clus</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let elem of DatosFinal[z]; index as i">
-        
-        <th>D{{i+1}}</th>
-        
-        <th *ngFor="let kv of elem | keyvalue">
-          <div *ngIf="elem[elem.length-1]==1" >
-            <a >{{ roundNumber(kv.value)}}</a>
-          </div>  
-          <div *ngIf="elem[elem.length-1]==2" >
-            <a >{{roundNumber(kv.value) }}</a>
-          </div>  
-          <div *ngIf="elem[elem.length-1]==3" >
-            <a >{{ roundNumber(kv.value) }}</a>
-          </div>          
-        </th>
-        
-      </tr>
-    </tbody>
-  </table>
-  
-  <div>
-  <h5>Centros Finales </h5>
-  <table class="table table-bordered  table-dark table-striped">
-    <thead class="table-gray">
-      <tr>
-        <th >{{z+1}}</th>
-        <th >V1</th>
-        <th >V2</th>
-        <th >V3</th>
-        <th >V4</th>
-        <th >V5</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let elem of CentrosFinal[z]; index as i">
-        <th>D{{i+1}}</th>
-        <th *ngFor="let kv of elem | keyvalue " ><span> {{ roundNumber(kv.value) }} </span></th>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<h5>Grupos Finales</h5>
-<table class="table table-bordered  table-dark table-striped">
-  <thead class="table-gray">
-    <tr>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let elem of GruposFinal[z]; index as i">
-      <th>Grupo {{i+1}}</th>
-      <th ><span> {{ elem }} </span></th>
-    </tr>
-  </tbody>
-</table>
+    <div class="card">
+      <div class="card-body max-size">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <h5>Matriz de distancia iteración {{z+1}}</h5>
+
+                <table class="table table-bordered  table-success table-striped">
+        <thead class="table-gray">
+          <tr>
+            <th >{{z+1}}</th>
+            <th >V1</th>
+            <th >V2</th>
+            <th >V3</th>
+            <th >Minimo</th>
+            <th >Clúster</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let elem of DatosFinal[z]; index as i">
+            
+            <th>{{i+1}}</th>
+            
+            <th *ngFor="let kv of elem | keyvalue">
+              <div *ngIf="elem[elem.length-1]==1" >
+                <a >{{ roundNumber(kv.value)}}</a>
+              </div>  
+              <div *ngIf="elem[elem.length-1]==2" >
+                <a >{{roundNumber(kv.value) }}</a>
+              </div>  
+              <div *ngIf="elem[elem.length-1]==3" >
+                <a >{{ roundNumber(kv.value) }}</a>
+              </div>          
+            </th>
+            
+          </tr>
+        </tbody>
+      </table>
+                
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="card" style="width: 50rem;">
+                <h5>Centros {{z+1}} </h5>
+                <table class="table table-bordered  table-dark table-striped">
+                  <thead class="table-gray">
+                    <tr>
+                      <th >{{z+1}}</th>
+                      <th >V1</th>
+                      <th >V2</th>
+                      <th >V3</th>
+                      <th >V4</th>
+                      <th >V5</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let elem of CentrosFinal[z]; index as i">
+                      <th>Centro {{i+1}}</th>
+                      <th *ngFor="let kv of elem | keyvalue " ><span> {{ roundNumber(kv.value) }} </span></th>
+                    </tr>
+                  </tbody>
+                </table>
+                <h5>Grupos {{z+1}}</h5>
+              <table class="table table-bordered  table-dark table-striped">
+                <thead class="table-gray">
+                  <tr>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let elem of GruposFinal[z]; index as i">
+                    <th>Grupo {{i+1}}</th>
+                    <th ><span> {{ elem }} </span></th>
+                  </tr>
+                </tbody>
+              </table>
+              
+    <div class="card" style="width: 50rem;">
+      <canvas baseChart
+        [datasets]="scatterChartData"
+        [options]="scatterChartOptions"
+        [chartType]="scatterChartType">
+      </canvas>
+      
+      
+    </div>
+              </div>
+    
+            </div>
+        </div>
+      </div>
+    </div>
 </div>
 <div *ngIf="z==DatosFinal.length-1  && nClusterF==2">
-  <h5>Datos de Distancia euclidiana Final</h5>
-  <table class="table table-bordered  table-success table-striped">
+  
+  
+
+<div class="card">
+  <div class="card-body max-size">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <h5>Matriz de distancia iteración {{z+1}}</h5>
+            <table class="table table-bordered  table-success table-striped">
     <thead class="table-gray">
       <tr>
         <th >{{z+1}}</th>
         <th >V1</th>
         <th >V2</th>
-        <th >min</th>
-        <th >Clus</th>
+        <th >Minimo</th>
+        <th >Clúster</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let elem of DatosFinal[z]; index as i">
         
-        <th>D{{i+1}}</th>
+        <th> {{i+1}}</th>
         
         <th *ngFor="let kv of elem | keyvalue">
           <div *ngIf="elem[elem.length-1]==1" >
@@ -313,46 +334,44 @@
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5>Centros Finales </h5>
-  <table class="table table-bordered  table-dark table-striped">
-    <thead class="table-gray">
-      <tr>
-        <th >{{z+1}}</th>
-        <th >V1</th>
-        <th >V2</th>
-        <th >V3</th>
-        <th >V4</th>
-        <th >V5</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let elem of CentrosFinal[z]; index as i">
-        <th>D{{i+1}}</th>
-        <th *ngFor="let kv of elem | keyvalue " ><span> {{ roundNumber(kv.value) }} </span></th>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<h5>Grupos Finales</h5>
-<table class="table table-bordered  table-dark table-striped">
-  <thead class="table-gray">
-    <tr>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let elem of GruposFinal[z]; index as i">
-      <th>Grupo {{i+1}}</th>
-      <th ><span> {{ elem }} </span></th>
-    </tr>
-  </tbody>
-</table>
-</div>
-<div>
-</div>
-</div>
-
-<div class="input-group mb-3">
+            
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <div class="card" style="width: 50rem;">
+            <h5>Centros {{z+1}} </h5>
+            <table class="table table-bordered  table-dark table-striped">
+              <thead class="table-gray">
+                <tr>
+                  <th >{{z+1}}</th>
+                  <th >V1</th>
+                  <th >V2</th>
+                  <th >V3</th>
+                  <th >V4</th>
+                  <th >V5</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let elem of CentrosFinal[z]; index as i">
+                  <th>Centro {{i+1}}</th>
+                  <th *ngFor="let kv of elem | keyvalue " ><span> {{ roundNumber(kv.value) }} </span></th>
+                </tr>
+              </tbody>
+            </table>
+            <h5>Grupos {{z+1}}</h5>
+          <table class="table table-bordered  table-dark table-striped">
+            <thead class="table-gray">
+              <tr>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let elem of GruposFinal[z]; index as i">
+                <th>Grupo {{i+1}}</th>
+                <th ><span> {{ elem }} </span></th>
+              </tr>
+            </tbody>
+          </table>
+          
+<div class="card" style="width: 50rem;">
   <canvas baseChart
     [datasets]="scatterChartData"
     [options]="scatterChartOptions"
@@ -361,3 +380,11 @@
   
 	
 </div>
+          </div>
+
+        </div>
+    </div>
+  </div>
+</div></div>
+
+

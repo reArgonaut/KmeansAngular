@@ -12,8 +12,26 @@ export class ClusComponent {
  
   public scatterChartOptions: ChartOptions = {
     responsive: true,
-    
-  };
+    scales: {
+     yAxes: [
+      {
+       display: true,
+       scaleLabel: {
+        display: true,
+        labelString: "Minimo",
+       },
+      },
+     ],
+     xAxes: [
+      {
+       scaleLabel: {
+        display: true,
+        labelString: "Cluster",
+       },
+      },
+     ],
+    },
+   };
   
   public scatterChartData: ChartDataSets[] = [{
     label: 'Scatter Dataset',
@@ -46,9 +64,8 @@ export class ClusComponent {
     [6, 7, 7, 7, 8],
     [3, 2, 6, 5, 7],
     [3, 5, 4, 6, 3]]
-  constructor() {
-   }
-
+  constructor() {}
+  
   DatosFinal    : any[]  = [];
   GruposFinal    : any[]  = [];
   CentrosFinal  : any[]  = [];
@@ -300,11 +317,12 @@ export class ClusComponent {
     this.data22       = [];
     this.centros22    = [];
     this.counter      = 1;
+    this.scatterChartData=[]
     nIteraciones=nIteraciones-1;
     if(nCluster==2 ||nCluster==3){
     this.PrimeraIteracionNPD(nCluster);
     for(let n = 0; n < nIteraciones; n++){
-      this.SiguientesIteracionesNPD(nCluster);      
+      this.SiguientesIteracionesNPD(nCluster);
     }
     this.GraphMaybe(nIteraciones, nCluster);
   }
@@ -313,84 +331,41 @@ export class ClusComponent {
     console.log("this.DatosFinal[0][0]")
     var color='';
     console.log(this.DatosFinal[0][0])
-    this.scatterChartData=[]
     var datal:any[]=[];
-    for(let a=0;a<nCluster;a++){
-      if(a==0){
-        color ='rgb(255, 99, 132)'
-      }else if(a==1){
-        color ='rgb(1, 99, 132)'
-      }else if(a==2){
-        color ='rgb(255, 1, 132)'
-      }    
-      console.log("C F");
-      console.log(this.CentrosFinal[nIteraciones][0][0]);
-      console.log(this.CentrosFinal[nIteraciones][1][0]);
+    for(let a=0;a<nCluster;a++){          
       for(let b=0;b<14;b++){
         if(nCluster==2){
           if(this.DatosFinal[nIteraciones][b][3]==a+1){
             for(let c=0;c<5;c++){
-              datal.push({x:this.data[b][c],y:this.CentrosFinal[nIteraciones][a][c]});
+              datal.push({x:(a+1),y:this.DatosFinal[b][2]});
             }
           }
         }
         else{          
           if(this.DatosFinal[nIteraciones][b][4]==a+1){
             for(let c=0;c<5;c++){
-              datal.push({x:this.data[b][c],y:this.CentrosFinal[nIteraciones][a][c]})
+              datal.push({x:(a+1),y:this.data[b][3]})
             }
           }
         }
         
       }
-      
+      if(a==0){
+        color ='rgb(255,0,0)'
+      }else if(a==1){
+        color ='rgb(0,0,255)'
+      }else if(a==2){
+        color ='rgb(0,128,0)'
+      }
       this.scatterChartData.push({
-        label: (a+1).toString(),
+        label: "Grupo "+(a+1).toString()+" Final",
         data: datal,
+        pointBackgroundColor:color,
         backgroundColor: color,
         pointRadius: 10,
-      })
-      
+      })      
       datal=[];
     }
-    
-    // this.scatterChartData=[    
-    //   {
-    //     label: '1',
-    //   data: [
-    //     {x: this.DatosFinal[0][0][3],  y: (this.DatosFinal[0][0][0]+this.DatosFinal[0][0][1]+this.DatosFinal[0][0][2])/3 }, 
-    //     {x: this.DatosFinal[0][1][3],  y: (this.DatosFinal[0][1][0]+this.DatosFinal[0][1][1]+this.DatosFinal[0][1][2])/3 }, 
-    //     {x: this.DatosFinal[0][2][3],  y: (this.DatosFinal[0][2][0]+this.DatosFinal[0][2][1]+this.DatosFinal[0][2][2])/3 }, 
-    //     {x: this.DatosFinal[0][3][3],  y: (this.DatosFinal[0][3][0]+this.DatosFinal[0][3][1]+this.DatosFinal[0][3][2])/3 }, 
-    //     {x: this.DatosFinal[0][4][3],  y: (this.DatosFinal[0][4][0]+this.DatosFinal[0][4][1]+this.DatosFinal[0][4][2])/3 }, 
-    //     {x: this.DatosFinal[0][5][3],  y: (this.DatosFinal[0][5][0]+this.DatosFinal[0][5][1]+this.DatosFinal[0][5][2])/3 }, 
-    //     {x: this.DatosFinal[0][6][3],  y: (this.DatosFinal[0][6][0]+this.DatosFinal[0][6][1]+this.DatosFinal[0][6][2])/3 }, 
-    //     {x: this.DatosFinal[0][7][3],  y: (this.DatosFinal[0][7][0]+this.DatosFinal[0][7][1]+this.DatosFinal[0][7][2])/3 },
-    //     {x: this.DatosFinal[0][8][3],  y: (this.DatosFinal[0][8][0]+this.DatosFinal[0][8][1]+this.DatosFinal[0][8][2])/3 }, 
-    //     {x: this.DatosFinal[0][9][3],  y: (this.DatosFinal[0][9][0]+this.DatosFinal[0][9][1]+this.DatosFinal[0][9][2])/3 }, 
-    //     {x: this.DatosFinal[0][10][3],  y: (this.DatosFinal[0][10][0]+this.DatosFinal[0][10][1]+this.DatosFinal[0][10][2])/3 }, 
-    //     {x: this.DatosFinal[0][11][3],  y: (this.DatosFinal[0][11][0]+this.DatosFinal[0][11][1]+this.DatosFinal[0][11][2])/3 },
-    //     {x: this.DatosFinal[0][12][3],  y: (this.DatosFinal[0][12][0]+this.DatosFinal[0][12][1]+this.DatosFinal[0][12][2])/3 }, 
-    //     {x: this.DatosFinal[0][13][3],  y: (this.DatosFinal[0][13][0]+this.DatosFinal[0][13][1]+this.DatosFinal[0][13][2])/3 }
-    //     // {x: this.DatosFinal[0][0][3],  y: this.DatosFinal[0][0][4] }, 
-    //     // {x: this.DatosFinal[0][1][3],  y: (this.DatosFinal[0][1][4]) }, 
-    //     // {x: this.DatosFinal[0][2][3],  y: (this.DatosFinal[0][2][4]) }, 
-    //     // {x: this.DatosFinal[0][3][3],  y: (this.DatosFinal[0][3][4]) }, 
-    //     // {x: this.DatosFinal[0][4][3],  y: (this.DatosFinal[0][4][4]) }, 
-    //     // {x: this.DatosFinal[0][5][3],  y: (this.DatosFinal[0][5][4]) }, 
-    //     // {x: this.DatosFinal[0][6][3],  y: (this.DatosFinal[0][6][4]) }, 
-    //     // {x: this.DatosFinal[0][7][3],  y: (this.DatosFinal[0][7][4]) },
-    //     // {x: this.DatosFinal[0][8][3],  y: (this.DatosFinal[0][8][4]) }, 
-    //     // {x: this.DatosFinal[0][9][3],  y: (this.DatosFinal[0][9][4]) }, 
-    //     // {x: this.DatosFinal[0][10][3],  y: (this.DatosFinal[0][10][4]) }, 
-    //     // {x: this.DatosFinal[0][11][3],  y: (this.DatosFinal[0][11][4]) },
-    //     // {x: this.DatosFinal[0][12][3],  y: (this.DatosFinal[0][12][4]) }, 
-    //     // {x: this.DatosFinal[0][13][3],  y: (this.DatosFinal[0][13][4]) }
-
-    //   ], 
-    //     pointRadius: 10,      
-    //   },
-    // ];
   }
   HacerLasIteraciones(nIteraciones:number){
     this.DatosFinal   = [];
@@ -405,7 +380,6 @@ export class ClusComponent {
       this.SiguientesIteraciones();
     }
     this.GraphMaybe(nIteraciones, 3);
-
   }
   SiguientesIteracionesNPD(nCluster:number){    
     this.counter++;
@@ -512,15 +486,17 @@ export class ClusComponent {
   this.CentrosFinal.push(centros2);   
   console.log("this centros22")
   console.log(this.centros22)  
+  var succ=0;
   for (let c = 0; c < nCluster; c++) {
     for (let a = 0; a < 14; a++) {       
       if (data2[a][nCluster+1] == c+1 ) {
+        succ =a
         lineagrupos.push(a+1);
-        lg= lg.concat((a+1).toString()+" ");
+        lg= lg.concat("-->"+(a+1).toString()+") = "+this.data[succ]+"\n");
       }               
     }
     grupos.push(lg); 
-    lg=""; 
+    lg="\n"; 
       lineagrupos=[];   
 }
 this.GruposFinal.push(grupos);
@@ -609,12 +585,10 @@ this.GruposFinal.push(grupos);
           lineagrupos=[];   
     }
     this.GruposFinal.push(grupos);
-    console.log(this.GruposFinal);  
     }
     roundNumber(num:any) {
       return Math.round(num * Math.pow(10, 2)) / Math.pow(10, 2);
   }
 
   
-
 }
