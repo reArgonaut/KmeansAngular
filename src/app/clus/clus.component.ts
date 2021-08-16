@@ -81,94 +81,7 @@ export class ClusComponent {
   centro:any=99;
   midnumbers:any[]=[];
   nClusterF=0;
-  PrimeraIteracionConCentrosPreDefinidos() {
-    var data2 : any[]  = [];
-    var grupos : any[]  = [];  
-    var lg="";
-    var g="";
-    this.nClusterF=3;
-    var lineagrupos : any[]  = [];
-    var linea: any[]  = [];
-    var lineacentros: any[]  = [];
-    var centros2: any[]  = [];
-    for (let a = 0; a < 14; a++) {
-      for (let i = 0; i < 3; i++) {
-        var x =
-          Math.abs(this.data[a][0] - this.Centros1[i][0]) +
-          Math.abs(this.data[a][1] - this.Centros1[i][1]) +
-          Math.abs(this.data[a][2] - this.Centros1[i][2]) +
-          Math.abs(this.data[a][3] - this.Centros1[i][3]) +
-          Math.abs(this.data[a][4] - this.Centros1[i][4])
-        linea.push(x);
-      }
-      data2.push(linea);
-      linea = [];
-    }
-    for (let a = 0; a < 14; a++) {
-      var x = Math.min(data2[a][0], data2[a][1], data2[a][2]);
-      data2[a].push(x);
-    }
-    var max = Math.max(data2[0][3], data2[1][3], data2[2][3], data2[3][3], data2[4][3], data2[5][3], data2[6][3], data2[7][3], data2[8][3], data2[9][3], data2[10][3], data2[11][3], data2[12][3], data2[13][3]);
-    var min = Math.min(data2[0][3], data2[1][3], data2[2][3], data2[3][3], data2[4][3], data2[5][3], data2[6][3], data2[7][3], data2[8][3], data2[9][3], data2[10][3], data2[11][3], data2[12][3], data2[13][3]);
-    var avr = (data2[0][3] + data2[1][3] + data2[2][3] + data2[3][3] + data2[4][3] + data2[5][3] + data2[6][3] + data2[7][3] + data2[8][3] + data2[9][3] + data2[10][3] + data2[11][3] + data2[12][3] + data2[13][3]) / 14;
-    var clus = 0;
-    for (let a = 0; a < 14; a++) {
-      if ((Math.abs(data2[a][3] - max) < Math.abs(data2[a][3] - min))) {
-        if ((Math.abs(data2[a][3] - max) < Math.abs(data2[a][3] - avr))) {
-          clus = 1;          
-        }
-      }
-      if ((Math.abs(data2[a][3] - min) < Math.abs(data2[a][3] - max))) {
-        if ((Math.abs(data2[a][3] - min) < Math.abs(data2[a][3] - avr))) {
-          clus = 3;
-        }
-      }
-      if ((Math.abs(data2[a][3] - avr) < Math.abs(data2[a][3] - min))) {
-        if ((Math.abs(data2[a][3] - avr) < Math.abs(data2[a][3] - max))) {
-          clus = 2;
-        }
-      }
-      data2[a].push(clus);
-    }
-    this.data22 = data2;
-    this.DatosFinal.push(data2);
-    var y=0;
-    var co = 0;
-    for (let c = 0; c < 3; c++) {
-    for (let b = 0; b < 5; b++) {
-      for (let a = 0; a < 14; a++) {       
-        if (data2[a][4] == c+1 ) {
-          y += this.data[a][b];
-          co++;
-        }        
-      }
-      y=y/co;      
-      lineacentros.push(y);
-      y=0;
-      co=0;      
-    }    
-    centros2.push(lineacentros);
-    lineacentros=[];
-
-  }
-    
-    this.centros22=centros2;
-    this.CentrosFinal.push(centros2);
-
-    for (let c = 0; c < 3; c++) {
-        for (let a = 0; a < 14; a++) {       
-          if (data2[a][4] == c+1 ) {
-            lineagrupos.push(a+1);
-            lg= lg.concat((a+1).toString()+" ");
-          }               
-        }
-        grupos.push(lg); 
-        lg=""; 
-          lineagrupos=[];   
-    }
-    this.GruposFinal.push(grupos);
-   console.log(this.GruposFinal);
-  }
+ 
   CentrosRandom(nCluster:number){
      this.centroNCluster=[];
      this.centroinit=[];
@@ -217,6 +130,8 @@ export class ClusComponent {
           Math.abs(this.data[a][3] - this.centroNCluster[i][3]) +
           Math.abs(this.data[a][4] - this.centroNCluster[i][4])
         linea.push(x);
+        
+        
       }
       data2.push(linea);
       linea = [];
@@ -317,7 +232,7 @@ export class ClusComponent {
     this.data22       = [];
     this.centros22    = [];
     this.counter      = 1;
-    this.scatterChartData=[]
+    this.scatterChartData=[];
     nIteraciones=nIteraciones-1;
     if(nCluster==2 ||nCluster==3){
     this.PrimeraIteracionNPD(nCluster);
@@ -328,24 +243,18 @@ export class ClusComponent {
   }
   }
   GraphMaybe(nIteraciones:number, nCluster:number){
-    console.log("this.DatosFinal[0][0]")
     var color='';
-    console.log(this.DatosFinal[0][0])
     var datal:any[]=[];
     for(let a=0;a<nCluster;a++){          
       for(let b=0;b<14;b++){
         if(nCluster==2){
           if(this.DatosFinal[nIteraciones][b][3]==a+1){
-            for(let c=0;c<5;c++){
-              datal.push({x:(a+1),y:this.DatosFinal[b][2]});
-            }
+              datal.push({x:(a+1),y:this.data[b][2]});
           }
         }
-        else{          
+        else if(nCluster==3){          
           if(this.DatosFinal[nIteraciones][b][4]==a+1){
-            for(let c=0;c<5;c++){
               datal.push({x:(a+1),y:this.data[b][3]})
-            }
           }
         }
         
@@ -358,7 +267,7 @@ export class ClusComponent {
         color ='rgb(0,128,0)'
       }
       this.scatterChartData.push({
-        label: "Grupo "+(a+1).toString()+" Final",
+        label: "Grupo "+(a+1).toString(),
         data: datal,
         pointBackgroundColor:color,
         backgroundColor: color,
@@ -366,20 +275,6 @@ export class ClusComponent {
       })      
       datal=[];
     }
-  }
-  HacerLasIteraciones(nIteraciones:number){
-    this.DatosFinal   = [];
-    this.CentrosFinal = [];
-    this.GruposFinal=[];
-    this.data22       = [];
-    this.centros22    = [];
-    this.counter      = 1;
-    nIteraciones=nIteraciones-1;
-    this.PrimeraIteracionConCentrosPreDefinidos();
-    for(let n = 0; n < nIteraciones; n++){
-      this.SiguientesIteraciones();
-    }
-    this.GraphMaybe(nIteraciones, 3);
   }
   SiguientesIteracionesNPD(nCluster:number){    
     this.counter++;
@@ -486,107 +381,26 @@ export class ClusComponent {
   this.CentrosFinal.push(centros2);   
   console.log("this centros22")
   console.log(this.centros22)  
+  var na:any[]=[]
   var succ=0;
   for (let c = 0; c < nCluster; c++) {
     for (let a = 0; a < 14; a++) {       
       if (data2[a][nCluster+1] == c+1 ) {
         succ =a
-        lineagrupos.push(a+1);
-        lg= lg.concat("-->"+(a+1).toString()+") = "+this.data[succ]+"\n");
+        lineagrupos.push(">"+(a+1)+") --");
+        //lineagrupos.push(">"+(a+1)+") "+this.data[succ]);
+
       }               
     }
-    grupos.push(lg); 
-    lg="\n"; 
-      lineagrupos=[];   
+    grupos.push(lineagrupos); 
+    lg=""; 
+    na=[]
+    lineagrupos=[];   
 }
 this.GruposFinal.push(grupos);
    
   }
-  SiguientesIteraciones(){    
-      this.counter++;
-      var data2 : any[]  = [];
-      var lg="";
-      var g="";
-      var linea : any[]  = [];     
-      var grupos : any[]  = [];
-      var lineagrupos : any[]  = [];
-      var lineacentros: any[]  = [];
-      var centros2: any[]  = [];
-      for (let a = 0; a < 14; a++) {
-        for (let i = 0; i < 3; i++) {
-          var x =
-            Math.abs(this.data[a][0] - this.centros22[i][0]) +
-            Math.abs(this.data[a][1] - this.centros22[i][1]) +
-            Math.abs(this.data[a][2] - this.centros22[i][2]) +
-            Math.abs(this.data[a][3] - this.centros22[i][3]) +
-            Math.abs(this.data[a][4] - this.centros22[i][4])
-          linea.push(x);
-        }
-        data2.push(linea);
-        linea = [];
-      }
-      for (let a = 0; a < 14; a++) {
-        var x = Math.min(data2[a][0], data2[a][1], data2[a][2]);
-        data2[a].push(x);
-      }
-      var max = Math.max(data2[0][3], data2[1][3], data2[2][3], data2[3][3], data2[4][3], data2[5][3], data2[6][3], data2[7][3], data2[8][3], data2[9][3], data2[10][3], data2[11][3], data2[12][3], data2[13][3]);
-      var min = Math.min(data2[0][3], data2[1][3], data2[2][3], data2[3][3], data2[4][3], data2[5][3], data2[6][3], data2[7][3], data2[8][3], data2[9][3], data2[10][3], data2[11][3], data2[12][3], data2[13][3]);
-      var avr = (data2[0][3] + data2[1][3] + data2[2][3] + data2[3][3] + data2[4][3] + data2[5][3] + data2[6][3] + data2[7][3] + data2[8][3] + data2[9][3] + data2[10][3] + data2[11][3] + data2[12][3] + data2[13][3]) / 14;
-      var clus = 0;
-      for (let a = 0; a < 14; a++) {
-        if ((Math.abs(data2[a][3] - avr) < Math.abs(data2[a][3] - min))) {
-          if ((Math.abs(data2[a][3] - avr) < Math.abs(data2[a][3] - max))) {
-            clus = 1;
-          }
-        }
-        if ((Math.abs(data2[a][3] - min) < Math.abs(data2[a][3] - max))) {
-          if ((Math.abs(data2[a][3] - min) < Math.abs(data2[a][3] - avr))) {
-            clus = 3;
-          }
-        }
-        if ((Math.abs(data2[a][3] - max) < Math.abs(data2[a][3] - min))) {
-          if ((Math.abs(data2[a][3] - max) < Math.abs(data2[a][3] - avr))) {
-            clus = 2;
-          }
-        }        
-        data2[a].push(clus);
-  
-      }
-      this.data22 = data2;
-      this.DatosFinal.push(data2);
-      var y=0;
-      var co = 0;
-      for (let c = 0; c < 3; c++) {
-      for (let b = 0; b < 5; b++) {
-        for (let a = 0; a < 14; a++) {       
-          if (data2[a][4] == c+1 ) {
-            y += this.data[a][b];
-            co++;
-          }        
-        }
-        y=y/co;      
-        lineacentros.push(y);
-        y=0;
-        co=0;      
-      }    
-      centros2.push(lineacentros);
-      lineacentros=[];
-  
-    }      
-      this.centros22=centros2;
-      this.CentrosFinal.push(centros2);      
-      for (let c = 0; c < 3; c++) {
-        for (let a = 0; a < 14; a++) {       
-          if (data2[a][4] == c+1 ) {
-            lineagrupos.push(a+1);
-          }               
-        }
-        grupos.push(lineagrupos);  
-          lineagrupos=[];   
-    }
-    this.GruposFinal.push(grupos);
-    }
-    roundNumber(num:any) {
+  roundNumber(num:any) {
       return Math.round(num * Math.pow(10, 2)) / Math.pow(10, 2);
   }
 
