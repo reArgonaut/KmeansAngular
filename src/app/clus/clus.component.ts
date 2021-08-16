@@ -212,11 +212,13 @@ export class ClusComponent {
     console.log("------ centros22")
   console.log(this.centros22);
 
+  var succ=0;
     for (let c = 0; c < nCluster; c++) {
         for (let a = 0; a < 14; a++) {       
           if (data2[a][nCluster+1] == c+1 ) {
             lineagrupos.push(a+1);
-            lg= lg.concat((a+1).toString()+" ");
+            succ=a
+            lg= lg.concat("("+(a+1)+") ->"+this.data[succ]);
           }               
         }
         grupos.push(lg); 
@@ -379,16 +381,13 @@ export class ClusComponent {
   
   this.centros22=centros2;
   this.CentrosFinal.push(centros2);   
-  console.log("this centros22")
-  console.log(this.centros22)  
   var na:any[]=[]
   var succ=0;
   for (let c = 0; c < nCluster; c++) {
     for (let a = 0; a < 14; a++) {       
       if (data2[a][nCluster+1] == c+1 ) {
         succ =a
-        lineagrupos.push(">"+(a+1)+") --");
-        //lineagrupos.push(">"+(a+1)+") "+this.data[succ]);
+        lineagrupos.push("("+(a+1)+") ->"+this.data[succ]);
 
       }               
     }
